@@ -17,9 +17,13 @@ public class AccessUtil {
     public static boolean isAdmin(User user){
         return user.getDefaultRole() != null && user.getDefaultRole().equals(Role.ADMIN);
     }
+
+    /**
+     * Checking access for a perticlur ACCESS_ONLY file
+     **/
     public static void checkAccess(User user, Resource resource, Map<String,List<String>> resourceUserAccess){
         if(resource.getAccessType().equals(AccessType.ACCESS_ONLY)){
-            if(!AccessUtil.isAdmin(user)){
+            if(!isAdmin(user)){
                 List<String> users = resourceUserAccess.get(resource.getResourceName());
                 if(!users.stream().filter(i->i.equals(user.getUserName())).findFirst().isPresent()){
                     log.info("Access Denied : User does not have access permission");
@@ -29,6 +33,9 @@ public class AccessUtil {
         }
     }
 
+    /**
+     * Checking whether the user has proper role set for operation
+     * **/
     public static void checkUserAccess(User user){
         Role defaultRole = user.getDefaultRole();
         if(defaultRole == null){
@@ -37,15 +44,16 @@ public class AccessUtil {
         }
     }
 
+    /** Checking write Access of a user**/
     public static void checkAccess(User user,Role role){
-        if(!AccessUtil.isAdmin(user) && !user.getDefaultRole().equals(Role.WRITE_USER)){
+        if(!isAdmin(user) && !user.getDefaultRole().equals(Role.WRITE_USER)){
             log.info("User does not have permission for this operation");
             throw new AccessDeniedException("Access Denied");
         }
     }
 
     public static void checkAdminAccess(User user){
-        if(!AccessUtil.isAdmin(user)){
+        if(!isAdmin(user)){
             log.info("User does not have permission for this operation");
             throw new AccessDeniedException("Access Denied");
         }

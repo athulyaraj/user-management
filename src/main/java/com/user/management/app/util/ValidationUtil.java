@@ -2,7 +2,6 @@ package com.user.management.app.util;
 
 import com.user.management.app.entity.Resource;
 import com.user.management.app.entity.User;
-import com.user.management.app.enums.ActionType;
 import com.user.management.app.enums.Command;
 import com.user.management.app.exception.InvalidParamException;
 import com.user.management.app.exception.ResourceNotFoundException;
@@ -48,6 +47,7 @@ public class ValidationUtil {
         }
         return user;
     }
+
     public static void validatePassword(String password,Command command, Map<String,User> userRepo,User user){
         if(CommonUtil.isEmpty(password)){
             log.info("Invalid password");
@@ -61,6 +61,7 @@ public class ValidationUtil {
         }
     }
 
+    /** Input validation for CREATE/MODIFY resource **/
     public static void validateResource(Resource resource){
         if(CommonUtil.isEmpty(resource.getResourceName()) || CommonUtil.isEmpty(resource.getUrl())){
             log.info("Invalid resourceName/path");

@@ -4,7 +4,7 @@ import com.user.management.app.entity.User;
 import com.user.management.app.enums.Role;
 
 import java.io.BufferedReader;
-
+/** Managing all user specific operations **/
 public interface UserService {
     User performLogin(BufferedReader reader) throws Exception;
     User createUser(BufferedReader reader) throws Exception;

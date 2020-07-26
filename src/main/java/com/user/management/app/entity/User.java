@@ -1,6 +1,5 @@
 package com.user.management.app.entity;
 
-import com.user.management.app.enums.ActionType;
 import com.user.management.app.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

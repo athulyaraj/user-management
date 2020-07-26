@@ -28,6 +28,7 @@ public class CommonUtil {
         return false;
     }
 
+    /** For reading from resources folder **/
     public static void getFileFromResources(String fileName){
         try {
             InputStream is = UserManagementApp.class.getResourceAsStream(fileName);
@@ -43,6 +44,7 @@ public class CommonUtil {
         }
     }
 
+    /** For creating resource from CREATE/MODIFY resource commands **/
     public static Resource createOrModifyResourceRequest(List<String> parts){
         Resource resource = new Resource();
         for(String string : parts){

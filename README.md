@@ -1,5 +1,10 @@
 # User-Access-Management System
 
+This is a service for managing the access rights of users.There are 3 roles a user can possess.ADMIN is the supreme user.
+READ_USER is the default role. He will be able to read contents of files which has access type ANY.WRITE_USER can create resources.
+Resource has access types.Access type ANY means, anyone can access the file. ACCESS_ONLY means, only the users who has access to that resource can access the file.
+ADMIN can access all the files. He can grant access on resources to users. And he can set the user role.
+
 Requirements:
 * Maven-3.6.3
 * JDK-1.8.0_251
@@ -21,3 +26,7 @@ Supported Commands:
 * `GRANT _**resourcename**_ _**username**_`                                                                            - grant access to a perticular resource
 * `SIGN_OUT`                                                                                                           - to sign_out of logged in session
 * `QUIT`                                                                                                               - exit program
+
+Superuser credentials :
+username : superuser
+password : password

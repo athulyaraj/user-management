@@ -5,7 +5,7 @@ import com.user.management.app.entity.User;
 
 import java.util.List;
 import java.util.Map;
-
+/** Managing all resource specific operations**/
 public interface ResourceService {
     Map<String, Resource> getResourceRepo();
     Map<String, List<String>> getResourceUserAccessRepo();
