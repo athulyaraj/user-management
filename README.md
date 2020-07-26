@@ -5,17 +5,17 @@ READ_USER is the default role. He will be able to read contents of files which h
 Resource has access types.Access type ANY means, anyone can access the file. ACCESS_ONLY means, only the users who has access to that resource can access the file.
 ADMIN can access all the files. He can grant access on resources to users. And he can set the user role.
 
-Requirements:
+## Requirements:
 * Maven-3.6.3
 * JDK-1.8.0_251
 
-Build and Run instructions:
+## Build and Run instructions:
 * create jar by `mvn clean install -DskipTests`
 * Move to target folder
 * Run program `java -jar user-management-1.0-SNAPSHOT.jar`
 
 
-Supported Commands:
+## Supported Commands:
 * `LOGIN`                                                                                                              - To login with the creadentials
 * `SIGN_UP`                                                                                                            - To sign up 
 * `LIST`                                                                                                               - See all the resources
@@ -27,6 +27,14 @@ Supported Commands:
 * `SIGN_OUT`                                                                                                           - to sign_out of logged in session
 * `QUIT`                                                                                                               - exit program
 
-Superuser credentials :
+## Important Files:
+* ResourceServiceImpl
+* UserServiceImpl
+* UserManagementApp
+* AccessType
+* Command
+* Role
+
+#### Admin Credentials :
 username : superuser
 password : password
