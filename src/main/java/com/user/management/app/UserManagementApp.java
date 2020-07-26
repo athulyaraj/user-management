@@ -63,7 +63,7 @@ public class UserManagementApp {
                 case MODIFY     :   resource = CommonUtil.createOrModifyResourceRequest(parts);
                                     resourceService.modifyResource(parts.get(1),user,resource);
                                     break;
-                case GRANT      :   userService.grantAccess(parts.get(1),parts.get(2),user);
+                case GRANT      :   userService.grantAccess(parts.get(1),parts.get(2),CommonUtil.getActionTypesFromArgs(parts.get(3)),user);
                                     break;
                 case SET        :   userService.setUserRole(parts.get(1),user,Role.valueOf(parts.get(2)));
                                     break;

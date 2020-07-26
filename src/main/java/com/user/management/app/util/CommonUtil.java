@@ -3,12 +3,15 @@ package com.user.management.app.util;
 import com.user.management.app.UserManagementApp;
 import com.user.management.app.entity.Resource;
 import com.user.management.app.enums.AccessType;
+import com.user.management.app.enums.ActionType;
 import lombok.extern.java.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -63,5 +66,14 @@ public class CommonUtil {
             }
         }
         return resource;
+    }
+
+    public static List<ActionType> getActionTypesFromArgs(String params){
+        List<String> actions = Arrays.asList(params.split(","));
+        List<ActionType> actionTypes = new ArrayList<>();
+        for(String action : actions){
+            actionTypes.add(ActionType.valueOf(action));
+        }
+        return actionTypes;
     }
 }

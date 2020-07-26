@@ -2,7 +2,10 @@ package com.user.management.app.service.impl;
 
 import com.user.management.app.entity.Resource;
 import com.user.management.app.entity.User;
+import com.user.management.app.entity.UserAccess;
+import com.user.management.app.entity.UserAction;
 import com.user.management.app.enums.AccessType;
+import com.user.management.app.enums.ActionType;
 import com.user.management.app.enums.Command;
 import com.user.management.app.enums.Role;
 import com.user.management.app.service.ResourceService;
@@ -118,24 +121,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void grantAccess(String resourceName, String userName, User user) {
-        AccessUtil.checkAdminAccess(user);
+    public void grantAccess(String resourceName, String userName, List<ActionType> actionTypes,User user) {
+        AccessUtil.checkAccess(user.getDefaultRole().getActionTypes(), ActionType.GRANT);
         Resource resource = resourceService.getResourceRepo().get(resourceName);
         ValidationUtil.isResourceAvailable(resource);
         if(resource.getAccessType().equals(AccessType.ACCESS_ONLY)){
-            List<String> userAccess = resourceService.getResourceUserAccessRepo().get(resourceName);
-            if(CommonUtil.isEmpty(userAccess)){
-                userAccess = new ArrayList<>();
+            List<UserAction> userActions = resourceService.getResourceUserAccessRepo().get(resourceName);
+            if(CommonUtil.isEmpty(userActions)){
+                userActions = new ArrayList<>();
             }
-            userAccess.add(userName);
-            resourceService.getResourceUserAccessRepo().put(resourceName,userAccess);
+            UserAction userAction = UserAction.builder()
+                    .username(userName)
+                    .actionTypeList(actionTypes)
+                    .build();
+            userActions.add(userAction);
+            resourceService.getResourceUserAccessRepo().put(resourceName,userActions);
         }
         log.info("OK");
     }
 
     @Override
     public void setUserRole(String username, User user, Role role) {
-        AccessUtil.checkAdminAccess(user);
+        AccessUtil.checkAccess(user.getDefaultRole().getActionTypes(), ActionType.SET);
         User u = userRepo.get(username);
         ValidationUtil.isUserAvailable(user);
         u.setDefaultRole(role);

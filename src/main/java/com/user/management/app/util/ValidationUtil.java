@@ -4,6 +4,7 @@ import com.user.management.app.entity.Resource;
 import com.user.management.app.entity.User;
 import com.user.management.app.enums.Command;
 import com.user.management.app.exception.InvalidParamException;
+import com.user.management.app.exception.OperationDeniedException;
 import com.user.management.app.exception.ResourceNotFoundException;
 import com.user.management.app.exception.UserNotFoundException;
 import lombok.extern.java.Log;
@@ -62,10 +63,14 @@ public class ValidationUtil {
     }
 
     /** Input validation for CREATE/MODIFY resource **/
-    public static void validateResource(Resource resource){
+    public static void validateResource(Resource resource,Map<String,Resource> resourceRepo){
         if(CommonUtil.isEmpty(resource.getResourceName()) || CommonUtil.isEmpty(resource.getUrl())){
             log.info("Invalid resourceName/path");
             throw new InvalidParamException("Invalid resourceName/path");
+        }
+        if(resourceRepo.containsKey(resource.getResourceName())){
+            log.info("Resource exists");
+            throw new OperationDeniedException("Resource exists");
         }
     }
 
