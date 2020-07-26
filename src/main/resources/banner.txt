@@ -40,3 +40,6 @@ GRANT resourcename username
 
 To sign-out and login as different user:
 SIGN_OUT
+
+To exit program,type:
+QUIT
