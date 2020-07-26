@@ -37,3 +37,6 @@ SET username
 
 To grant access to ACCESS_ONLY files, login as admin and use this command :
 GRANT resourcename username
+
+To sign-out and login as different user:
+SIGN_OUT
